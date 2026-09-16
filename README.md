@@ -80,10 +80,3 @@ Se usó para no invertir tiempo en CSS a mano (la consigna aclara que el diseño
 ### Testing
 
 Además de probar todo a mano en el navegador durante el desarrollo, hay una suite E2E con [Playwright](https://playwright.dev/) (`e2e/*.spec.ts`, plan detallado en [E2E_TEST_PLAN.md](./E2E_TEST_PLAN.md)) que corre contra la app real — pega a `thesimpsonsapi.com` de verdad, salvo los casos de error de red que interceptan la request a propósito. Cubre listado, búsqueda (con y sin resultados), filtros combinados, paginación (URL + scroll), detalle con fallback de datos faltantes, favoritos + persistencia, los 404/ids inválidos, ubicaciones, navegación por pestañas y el layout de 3 columnas en mobile. `npm run e2e` para correrla.
-
-### Qué mejoraría con más tiempo
-
-- Cachear el dataset completo (o al menos las páginas ya visitadas) en IndexedDB/localStorage con un TTL, para no repetir las 60 requests en cada recarga.
-- Tests unitarios (Karma/Jasmine) para la lógica de filtrado/paginación de `CharacterListComponent` y para `CharacterStore` en aislamiento (mockeando `SimpsonsApiService`) — la suite actual es E2E, no reemplaza tests unitarios.
-- Un indicador más fino de qué páginas fallaron al reintentar (hoy se reintenta todo el conjunto de páginas fallidas junto).
-- En "Ubicaciones", agregar un filtro por `use` (tipo de lugar) si en algún momento se necesitara combinarlo con búsqueda — hoy no lo tiene a propósito, para no repetir la complejidad de `CharacterStore` en una pantalla que no la necesita.
