@@ -12,6 +12,68 @@
   color: #c62828;
 }
 
+.loading-scene {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 48px 16px 32px;
+  text-align: center;
+  color: #616161;
+}
+
+.bush-peek {
+  width: 220px;
+  height: 170px;
+  max-width: 70vw;
+}
+
+.bush__shadow {
+  fill: rgba(0, 0, 0, 0.12);
+}
+
+.bush__mound,
+.bush__tuft {
+  fill: #4c9a2a;
+}
+
+.bush__tuft {
+  fill: #5cb02f;
+}
+
+.peeker__head {
+  fill: var(--mat-sys-primary, #1857b0);
+}
+
+.peeker__eye {
+  fill: #fff8e1;
+}
+
+.peeker__pupil {
+  fill: #241f14;
+}
+
+.bush__peeker {
+  transform-origin: 112px 126px;
+  animation: peek 2.6s ease-in-out infinite;
+}
+
+@keyframes peek {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.loading-scene p {
+  margin: 4px 0;
+  font-weight: 500;
+}
+
+.loading-scene mat-progress-bar {
+  width: 200px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
 .filters {
   display: flex;
   flex-wrap: wrap;

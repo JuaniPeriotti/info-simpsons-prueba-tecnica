@@ -9,7 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
 import { CharacterStore } from '../../core/services/character-store';
@@ -62,7 +62,7 @@ function buildFilterOptions(
     MatSlideToggleModule,
     MatIconModule,
     MatButtonModule,
-    MatProgressSpinnerModule,
+    MatProgressBarModule,
     MatPaginatorModule,
     CharacterCardComponent
   ],
