@@ -22,4 +22,15 @@ test.describe('Detalle de personaje', () => {
     await expect(page).toHaveURL(/\/episode\/1$/);
     await expect(page.getByRole('heading', { name: /Simpsons Roasting/ })).toBeVisible();
   });
+
+  test('una frase larga hace wrap dentro de su chip en vez de desbordar la página', async ({ page }) => {
+    await page.goto('/character/4'); // Lisa Simpson tiene una frase muy larga
+    const longPhrase = page.getByText(/Well, I wish you wouldnt/);
+    await expect(longPhrase).toBeVisible();
+
+    const overflowsHorizontally = await page.evaluate(
+      () => document.documentElement.scrollWidth > document.documentElement.clientWidth
+    );
+    expect(overflowsHorizontally).toBe(false);
+  });
 });

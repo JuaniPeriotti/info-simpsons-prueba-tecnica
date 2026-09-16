@@ -22,3 +22,23 @@ mat-card {
   background-color: #e3f2fd;
   border-radius: 4px;
 }
+
+/* mat-chip está pensado para tags cortos: por default no rompe línea y una
+   frase larga se sale del chip (y de la card). Mismo motivo que arriba, el
+   contenido interno del chip es DOM de Material, no del componente que lo usa. */
+mat-chip-set {
+  display: block;
+}
+
+mat-chip.mat-mdc-chip {
+  height: auto;
+  max-width: 100%;
+  white-space: normal;
+}
+
+mat-chip .mat-mdc-chip-action-label {
+  white-space: normal;
+  overflow-wrap: break-word;
+  display: block;
+  padding-block: 6px;
+}
