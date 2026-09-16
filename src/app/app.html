@@ -1,0 +1,36 @@
+<mat-toolbar color="primary">
+  <a routerLink="/" class="toolbar-link">
+    <mat-icon>tv</mat-icon>
+    <span>Info Simpsons</span>
+  </a>
+</mat-toolbar>
+
+<nav mat-tab-nav-bar [tabPanel]="tabPanel">
+  <a
+    mat-tab-link
+    routerLink="/"
+    routerLinkActive
+    [routerLinkActiveOptions]="{ exact: true }"
+    #charactersLink="routerLinkActive"
+    [active]="charactersLink.isActive"
+  >
+    <mat-icon>groups</mat-icon>
+    Personajes
+  </a>
+  <a
+    mat-tab-link
+    routerLink="/locations"
+    routerLinkActive
+    #locationsLink="routerLinkActive"
+    [active]="locationsLink.isActive"
+  >
+    <mat-icon>place</mat-icon>
+    Ubicaciones
+  </a>
+</nav>
+
+<mat-tab-nav-panel #tabPanel>
+  <main class="page">
+    <router-outlet />
+  </main>
+</mat-tab-nav-panel>

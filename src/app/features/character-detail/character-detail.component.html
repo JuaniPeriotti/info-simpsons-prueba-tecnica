@@ -1,0 +1,90 @@
+<a routerLink="/" class="back-link">
+  <mat-icon>arrow_back</mat-icon>
+  Volver al listado
+</a>
+
+@if (isLoading()) {
+  <div class="state-message">
+    <mat-progress-spinner mode="indeterminate" diameter="48" />
+    <p>Cargando personaje…</p>
+  </div>
+} @else if (isNotFound()) {
+  <div class="state-message">
+    <mat-icon>person_off</mat-icon>
+    <p>Este personaje no existe.</p>
+  </div>
+} @else if (isError()) {
+  <div class="state-message error">
+    <mat-icon>error_outline</mat-icon>
+    <p>No pudimos cargar este personaje. Puede ser un problema temporal de conexión.</p>
+    <button mat-flat-button color="primary" (click)="retry()">Reintentar</button>
+  </div>
+} @else if (character(); as character) {
+  <mat-card appearance="outlined" class="detail-card">
+    <div class="detail-header">
+      @if (imageUrl(); as url) {
+        <img [src]="url" [alt]="character.name" class="portrait" />
+      } @else {
+        <div class="portrait placeholder">
+          <mat-icon>person</mat-icon>
+        </div>
+      }
+
+      <div class="header-info">
+        <div class="name-row">
+          <h1>{{ character.name }}</h1>
+          <button
+            mat-icon-button
+            [attr.aria-label]="isFavorite(character.id) ? 'Quitar de favoritos' : 'Agregar a favoritos'"
+            (click)="toggleFavorite(character.id)"
+          >
+            <mat-icon>{{ isFavorite(character.id) ? 'favorite' : 'favorite_border' }}</mat-icon>
+          </button>
+        </div>
+
+        <dl class="fact-list">
+          <div>
+            <dt>Edad</dt>
+            <dd>{{ character.age ?? 'No disponible' }}</dd>
+          </div>
+          <div>
+            <dt>Género</dt>
+            <dd>{{ character.gender ?? 'No disponible' }}</dd>
+          </div>
+          <div>
+            <dt>Ocupación</dt>
+            <dd>{{ character.occupation ?? 'No disponible' }}</dd>
+          </div>
+          <div>
+            <dt>Estado</dt>
+            <dd>{{ character.status ?? 'No disponible' }}</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+    @if (character.description) {
+      <p class="description">{{ character.description }}</p>
+    }
+
+    <h2>Frases</h2>
+    @if (character.phrases.length > 0) {
+      <mat-chip-set>
+        @for (phrase of character.phrases; track phrase) {
+          <mat-chip>{{ phrase }}</mat-chip>
+        }
+      </mat-chip-set>
+    } @else {
+      <p class="muted">Este personaje no tiene frases registradas.</p>
+    }
+
+    @if (character.first_appearance_ep; as episode) {
+      <h2>Primera aparición</h2>
+      <p>
+        <a [routerLink]="['/episode', episode.id]">
+          Temporada {{ episode.season }}, episodio {{ episode.episode_number }}: "{{ episode.name }}"
+        </a>
+      </p>
+    }
+  </mat-card>
+}

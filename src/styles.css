@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  /* Amarillo "piel de Simpson" pedido por el usuario. */
+  background-color: #f2b705;
+}
+
+/* Las cards usan --mat-sys-surface para su fondo; lo pisamos acá (se hereda
+   a los elementos internos del card) para que sea celeste en vez de blanco. */
+mat-card {
+  --mat-sys-surface: #e3f2fd;
+}
+
+/* Los inputs/selects "outline" son transparentes por defecto y se pierden
+   contra el fondo amarillo; les damos el mismo celeste que las cards.
+   (El DOM interno de mat-form-field no hereda los estilos encapsulados del
+   componente que lo usa, así que esto tiene que vivir en el global.) */
+.mat-mdc-text-field-wrapper {
+  background-color: #e3f2fd;
+  border-radius: 4px;
+}

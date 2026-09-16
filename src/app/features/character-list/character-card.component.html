@@ -1,0 +1,28 @@
+<a class="card-link" [routerLink]="['/character', character().id]">
+  <mat-card appearance="outlined" class="character-card">
+    <button
+      mat-icon-button
+      class="favorite-button"
+      [attr.aria-label]="isFavorite() ? 'Quitar de favoritos' : 'Agregar a favoritos'"
+      (click)="toggleFavorite($event)"
+    >
+      <mat-icon>{{ isFavorite() ? 'favorite' : 'favorite_border' }}</mat-icon>
+    </button>
+
+    @if (imageUrl(); as url) {
+      <img mat-card-image [src]="url" [alt]="character().name" loading="lazy" />
+    } @else {
+      <div class="image-placeholder">
+        <mat-icon>person</mat-icon>
+      </div>
+    }
+
+    <mat-card-content>
+      <h3>{{ character().name }}</h3>
+      <p class="occupation">{{ character().occupation || 'Ocupación no disponible' }}</p>
+      <span class="status-chip" [class.deceased]="character().status === 'Deceased'">
+        {{ character().status || 'Estado desconocido' }}
+      </span>
+    </mat-card-content>
+  </mat-card>
+</a>

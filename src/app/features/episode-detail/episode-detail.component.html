@@ -1,0 +1,54 @@
+<a routerLink="/" class="back-link">
+  <mat-icon>arrow_back</mat-icon>
+  Volver al listado
+</a>
+
+@if (isLoading()) {
+  <div class="state-message">
+    <mat-progress-spinner mode="indeterminate" diameter="48" />
+    <p>Cargando episodio…</p>
+  </div>
+} @else if (isNotFound()) {
+  <div class="state-message">
+    <mat-icon>movie_filter</mat-icon>
+    <p>Este episodio no existe.</p>
+  </div>
+} @else if (isError()) {
+  <div class="state-message error">
+    <mat-icon>error_outline</mat-icon>
+    <p>No pudimos cargar este episodio. Puede ser un problema temporal de conexión.</p>
+    <button mat-flat-button color="primary" (click)="retry()">Reintentar</button>
+  </div>
+} @else if (episode(); as episode) {
+  <mat-card appearance="outlined" class="detail-card">
+    <div class="detail-header">
+      @if (imageUrl(); as url) {
+        <img [src]="url" [alt]="episode.name" class="thumbnail" />
+      } @else {
+        <div class="thumbnail placeholder">
+          <mat-icon>movie</mat-icon>
+        </div>
+      }
+
+      <div class="header-info">
+        <h1>{{ episode.name }}</h1>
+        <p class="meta">
+          Temporada {{ episode.season }}, episodio {{ episode.episode_number }}
+          @if (episode.airdate) {
+            · Emitido el {{ episode.airdate }}
+          }
+        </p>
+      </div>
+    </div>
+
+    @if (episode.synopsis) {
+      <h2>Sinopsis</h2>
+      <p class="text">{{ episode.synopsis }}</p>
+    }
+
+    @if (episode.description && episode.description !== episode.synopsis) {
+      <h2>Sobre el episodio</h2>
+      <p class="text">{{ episode.description }}</p>
+    }
+  </mat-card>
+}

@@ -1,0 +1,76 @@
+@if (fatalError(); as message) {
+  <div class="state-message error">
+    <mat-icon>error_outline</mat-icon>
+    <p>{{ message }}</p>
+    <button mat-flat-button color="primary" (click)="reloadEverything()">Reintentar</button>
+  </div>
+} @else if (loading()) {
+  <div class="state-message">
+    <mat-progress-spinner mode="determinate" [value]="progressPercent()" diameter="56" />
+    <p>Cargando personajes… {{ progressPercent() }}%</p>
+  </div>
+} @else {
+  <div class="filters">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Buscar por nombre</mat-label>
+      <mat-icon matPrefix>search</mat-icon>
+      <input
+        matInput
+        [value]="searchTerm()"
+        (input)="onSearchInput($any($event.target).value)"
+        placeholder="Ej: Homer"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Estado</mat-label>
+      <mat-select [value]="statusFilter()" (selectionChange)="onStatusChange($event.value)">
+        @for (option of statusOptions(); track option.value) {
+          <mat-option [value]="option.value">{{ option.label }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Género</mat-label>
+      <mat-select [value]="genderFilter()" (selectionChange)="onGenderChange($event.value)">
+        @for (option of genderOptions(); track option.value) {
+          <mat-option [value]="option.value">{{ option.label }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-slide-toggle [checked]="favoritesOnly()" (change)="onFavoritesOnlyToggle($event.checked)">
+      Solo favoritos
+    </mat-slide-toggle>
+  </div>
+
+  @if (hasPartialErrors()) {
+    <div class="partial-error-banner">
+      <mat-icon>warning</mat-icon>
+      <span>No se pudieron cargar {{ failedPagesCount() }} página(s) de personajes.</span>
+      <button mat-button (click)="retryFailedPages()">Reintentar</button>
+    </div>
+  }
+
+  @if (pagedCharacters().length === 0) {
+    <div class="state-message">
+      <mat-icon>search_off</mat-icon>
+      <p>Ningún personaje coincide con la búsqueda o los filtros aplicados.</p>
+    </div>
+  } @else {
+    <div class="character-grid">
+      @for (character of pagedCharacters(); track character.id) {
+        <app-character-card [character]="character" />
+      }
+    </div>
+
+    <mat-paginator
+      [length]="filteredCharacters().length"
+      [pageSize]="pageSize"
+      [pageIndex]="pageIndex()"
+      [hidePageSize]="true"
+      (page)="onPageChange($event)"
+    />
+  }
+}

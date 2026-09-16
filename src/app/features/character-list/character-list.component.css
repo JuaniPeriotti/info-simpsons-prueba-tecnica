@@ -1,0 +1,57 @@
+.state-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 64px 16px;
+  text-align: center;
+  color: #616161;
+}
+
+.state-message.error {
+  color: #c62828;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+
+.search-field {
+  flex: 1 1 260px;
+}
+
+.partial-error-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  margin-bottom: 16px;
+  background: #fff8e1;
+  color: #8d6e00;
+  border-radius: 4px;
+}
+
+.partial-error-banner span {
+  flex: 1;
+}
+
+.character-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+/* Por debajo de este ancho, minmax(180px) ya no entra ni 2 veces: forzamos
+   3 columnas fijas y angostas en vez de dejar que el grid caiga a 1. */
+@media (max-width: 600px) {
+  .character-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+}

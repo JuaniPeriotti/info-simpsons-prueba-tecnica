@@ -1,0 +1,41 @@
+<h1>Ubicaciones de Springfield</h1>
+
+@if (isLoading()) {
+  <div class="state-message">
+    <mat-progress-spinner mode="indeterminate" diameter="48" />
+    <p>Cargando ubicaciones…</p>
+  </div>
+} @else if (isError()) {
+  <div class="state-message error">
+    <mat-icon>error_outline</mat-icon>
+    <p>No pudimos cargar esta página de ubicaciones.</p>
+    <button mat-flat-button color="primary" (click)="retry()">Reintentar</button>
+  </div>
+} @else {
+  <div class="location-grid">
+    @for (location of locations(); track location.id) {
+      <mat-card appearance="outlined" class="location-card">
+        @if (imageUrl(location.image_path); as url) {
+          <img mat-card-image [src]="url" [alt]="location.name" loading="lazy" />
+        } @else {
+          <div class="image-placeholder">
+            <mat-icon>place</mat-icon>
+          </div>
+        }
+        <mat-card-content>
+          <h3>{{ location.name }}</h3>
+          <p>{{ location.town || 'Ciudad no disponible' }}</p>
+          <span class="use-chip">{{ location.use || 'Uso desconocido' }}</span>
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
+
+  <mat-paginator
+    [length]="totalCount()"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex()"
+    [hidePageSize]="true"
+    (page)="onPageChange($event)"
+  />
+}
