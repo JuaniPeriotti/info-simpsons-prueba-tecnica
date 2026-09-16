@@ -22,45 +22,18 @@
   color: #616161;
 }
 
-.bush-peek {
-  width: 220px;
-  height: 170px;
-  max-width: 70vw;
+.loading-wordmark {
+  font-family: 'Luckiest Guy', 'Roboto', sans-serif;
+  font-size: clamp(1.8rem, 6vw, 2.6rem);
+  letter-spacing: 1px;
+  color: var(--mat-sys-primary, #1857b0);
+  margin: 0 0 8px;
+  animation: wordmark-pulse 1.8s ease-in-out infinite;
 }
 
-.bush__shadow {
-  fill: rgba(0, 0, 0, 0.12);
-}
-
-.bush__mound,
-.bush__tuft {
-  fill: #4c9a2a;
-}
-
-.bush__tuft {
-  fill: #5cb02f;
-}
-
-.peeker__head {
-  fill: var(--mat-sys-primary, #1857b0);
-}
-
-.peeker__eye {
-  fill: #fff8e1;
-}
-
-.peeker__pupil {
-  fill: #241f14;
-}
-
-.bush__peeker {
-  transform-origin: 112px 126px;
-  animation: peek 2.6s ease-in-out infinite;
-}
-
-@keyframes peek {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+@keyframes wordmark-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.04); opacity: 0.85; }
 }
 
 .loading-scene p {

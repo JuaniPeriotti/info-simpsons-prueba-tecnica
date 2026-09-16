@@ -6,34 +6,7 @@
   </div>
 } @else if (loading()) {
   <div class="loading-scene">
-    <svg class="bush-peek" viewBox="0 0 220 170" role="img" aria-label="Algo se esconde en el arbusto mientras carga">
-      <ellipse class="bush__shadow" cx="112" cy="160" rx="85" ry="8" />
-
-      <g class="bush__mound">
-        <circle cx="30" cy="135" r="42" />
-        <circle cx="65" cy="122" r="38" />
-        <circle cx="52" cy="150" r="36" />
-      </g>
-      <g class="bush__mound">
-        <circle cx="192" cy="135" r="42" />
-        <circle cx="157" cy="122" r="38" />
-        <circle cx="170" cy="150" r="36" />
-      </g>
-
-      <g class="bush__peeker">
-        <circle cx="112" cy="92" r="34" class="peeker__head" />
-        <ellipse cx="100" cy="88" rx="9" ry="11" class="peeker__eye" />
-        <ellipse cx="124" cy="88" rx="9" ry="11" class="peeker__eye" />
-        <circle cx="100" cy="90" r="4" class="peeker__pupil" />
-        <circle cx="124" cy="90" r="4" class="peeker__pupil" />
-      </g>
-
-      <g class="bush__tuft">
-        <circle cx="88" cy="150" r="24" />
-        <circle cx="112" cy="148" r="30" />
-        <circle cx="136" cy="150" r="24" />
-      </g>
-    </svg>
+    <p class="loading-wordmark">Info Simpsons</p>
     <p>Cargando personajes… {{ progressPercent() }}%</p>
     <mat-progress-bar mode="determinate" [value]="progressPercent()" />
   </div>
